@@ -5,8 +5,9 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const bcrypt = require("bcrypt");
+const authMiddleware = require("../authorization/middleware");
 
-router.get("/", async (req, res, next) => {
+router.get("/", authMiddleware, async (req, res, next) => {
   const allCustomers = await Customer.findAll();
   res.send(allCustomers);
 });
