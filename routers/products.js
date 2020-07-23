@@ -1,29 +1,11 @@
 const Product = require("../models").product;
+const Category = require("../models").category;
 const express = require("express");
 const { Router } = express;
 const router = new Router();
 
-router.post("/", async (req, res, next) => {
-  console.log(req.body);
-  try {
-    const newProduct = await Product.create({
-      name: "Watermelon",
-      description: "Nice and juicy, from Spain.",
-      price: 5,
-      imageUrl:
-        "http://upload.evocdn.co.uk/fruitnet/uploads/asset_image/2_1212685_e.jpg",
-      categoryId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-    res.send(newProduct);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.get("/", async (req, res, next) => {
-  const allProducts = await Product.findAll();
+  const allProducts = await Product.findAll({ include: [Category] });
   res.send(allProducts);
 });
 
