@@ -14,8 +14,11 @@ router.post("/login", async (req, res, next) => {
       const customer = await Customer.findOne({ where: { email: email } });
       if (!customer) {
         res.status(404).send({ message: "Customer not found." });
-      } else if (!bcrypt.compareSync(password, customer.password)) {
-        res.status(400).send({ message: "Invalid password." });
+      } else if (
+        password !== customer.password &&
+        !bcrypt.compareSync(password, customer.password)
+      ) {
+        res.status(400).send({ message: "Invalid password!" });
       } else {
         const jwt = toJWT({ customerId: customer.id });
         console.log(customer);

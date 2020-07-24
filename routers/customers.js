@@ -7,12 +7,14 @@ const router = new Router();
 const bcrypt = require("bcrypt");
 const authMiddleware = require("../authorization/middleware");
 
+//http GET :4000/customers Authorization:"Bearer token"
+
 router.get("/", authMiddleware, async (req, res, next) => {
   const allCustomers = await Customer.findAll();
   res.send(allCustomers);
 });
 
-router.get("/:customerId", async (req, res, next) => {
+router.get("/:customerId", authMiddleware, async (req, res, next) => {
   const specificCustomer = await Customer.findByPk(req.params.customerId);
   if (!specificCustomer) {
     res.status(404).send("Customer not found.");
@@ -21,7 +23,7 @@ router.get("/:customerId", async (req, res, next) => {
   }
 });
 
-router.get("/:customerId/orders", async (req, res, next) => {
+router.get("/:customerId/orders", authMiddleware, async (req, res, next) => {
   const specificCustomer = await Customer.findByPk(req.params.customerId);
   if (!specificCustomer) {
     res.status(404).send("Customer not found.");
@@ -34,8 +36,7 @@ router.get("/:customerId/orders", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
-  console.log(req.body);
+router.post("/signup", async (req, res, next) => {
   const { address, email, firstName, lastName, password } = req.body;
   try {
     if (!address || !email || !firstName || !lastName || !password) {

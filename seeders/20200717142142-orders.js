@@ -9,36 +9,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        customerId: 2,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        customerId: 2,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        customerId: 3,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        customerId: 3,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        customerId: 3,
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
     ]);
   },
 
