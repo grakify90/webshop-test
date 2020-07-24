@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 const jsonParser = express.json();
 const customerRouter = require("./routers/customers");
 const productRouter = require("./routers/products");

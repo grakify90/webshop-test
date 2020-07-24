@@ -12,10 +12,12 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/:productId", async (req, res, next) => {
+  console.log("helleuuww");
+  const productId = req.params.productId;
   const newProductOrder = await ProductOrder.create({
-    productId: req.params.productId,
-    orderId: 2,
-    //hardcoded order
+    productId: productId,
+    // orderId: 2,
+    // //hardcoded order
   });
   res.send(newProductOrder);
 });
