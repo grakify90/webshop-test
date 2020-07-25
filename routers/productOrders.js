@@ -12,24 +12,34 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/:productId", async (req, res, next) => {
-  console.log("helleuuww");
-  const productId = req.params.productId;
+  const productId = parseInt(req.params.productId);
+  // const { orderId } = req.body;
+  // const order = parseInt(orderId);
+  // console.log(typeof order);
   const newProductOrder = await ProductOrder.create({
     productId: productId,
-    // orderId: 2,
-    // //hardcoded order
+    orderId: 2,
   });
   res.send(newProductOrder);
 });
 
 router.delete("/:productId", async (req, res, next) => {
+  const orderId = req.body;
   const productToDelete = await ProductOrder.findOne({
-    where: { productId: req.params.productId },
+    where: { productId: req.params.productId, orderId: orderId },
   });
-  //this should also change, include orderId somehow
   try {
     const deleted = await productToDelete.destroy();
     res.send(deleted);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/", async (req, res, next) => {
+  try {
+    await ProductOrder.destroy({ where: {}, truncate: true });
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
