@@ -18,15 +18,15 @@ router.post("/:productId", async (req, res, next) => {
   // console.log(typeof order);
   const newProductOrder = await ProductOrder.create({
     productId: productId,
-    orderId: 2,
+    orderId: null,
   });
   res.send(newProductOrder);
 });
 
 router.delete("/:productId", async (req, res, next) => {
-  const orderId = req.body;
+  // const orderId = req.body;
   const productToDelete = await ProductOrder.findOne({
-    where: { productId: req.params.productId, orderId: orderId },
+    where: { productId: req.params.productId, orderId: null },
   });
   try {
     const deleted = await productToDelete.destroy();
