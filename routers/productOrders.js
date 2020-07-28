@@ -13,13 +13,13 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:productId", async (req, res, next) => {
   const productId = parseInt(req.params.productId);
-  // const { orderId } = req.body;
-  // const order = parseInt(orderId);
-  // console.log(typeof order);
+  const newOrder = await Order.create({ date: new Date() });
+  console.log(newOrder.id);
   const newProductOrder = await ProductOrder.create({
     productId: productId,
-    orderId: null,
+    orderId: newOrder.id,
   });
+  console.log(newProductOrder.id);
   res.send(newProductOrder);
 });
 
