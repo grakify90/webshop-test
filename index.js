@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4001;
+// const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 const jsonParser = express.json();
 const customerRouter = require("./routers/customers");
 const productRouter = require("./routers/products");
 const authRouter = require("./routers/authorization");
 const orderRouter = require("./routers/orders");
 const productOrderRouter = require("./routers/productOrders");
-const cors = require("cors");
-app.use(cors());
+// const cors = require("cors");
+// app.use(cors());
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
